@@ -4,7 +4,8 @@ import Model.Product;
 import Repository.ProductRepository;
 import Exception.ProductNotFoundException;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -39,7 +40,7 @@ public class ProductService {
 
     public List<Product> getTopExpensive(int n) {
         return repo.findAll().stream()
-                .sorted((a, b) -> Double.compare(b.getPrice(), a.getPrice()))
+                .sorted(Comparator.comparingInt(Product::getPrice).reversed())
                 .limit(n)
                 .collect(Collectors.toList());
     }
