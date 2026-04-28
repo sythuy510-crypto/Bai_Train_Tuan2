@@ -69,3 +69,39 @@ Electronics:
 - Gia san pham dang duoc luu bang kieu so nguyen.
 - Phan xu ly chinh nam trong `ProductService`.
 - Du lieu hien tai duoc luu tam trong bo nho qua `ArrayList`.
+
+## Stream: map() va filter()
+
+- `filter()` dung de loc phan tu theo dieu kien.
+- `map()` dung de bien doi moi phan tu sang dang khac.
+
+Vi du `filter()`:
+
+```java
+List<Product> electronics = repo.findAll().stream()
+        .filter(p -> p.getCategory().equalsIgnoreCase("Electronics"))
+        .collect(Collectors.toList());
+```
+
+Vi du `map()`:
+
+```java
+List<String> productNames = repo.findAll().stream()
+        .map(Product::getName)
+        .collect(Collectors.toList());
+```
+
+## Demo debug trong IntelliJ
+
+Co the demo breakpoint tai:
+
+- `Main.java`: dong goi `service.getTopExpensive(3)`
+- `ProductService.java`: method `getTopExpensive()`
+
+Trinh tu demo:
+
+1. Dat breakpoint trong IntelliJ.
+2. Chon `Debug 'Main'`.
+3. Dung `Step Into` de di vao method.
+4. Kiem tra gia tri bien trong cua so `Variables`.
+5. Xem ket qua sau khi `sorted()` va `limit(3)`.
